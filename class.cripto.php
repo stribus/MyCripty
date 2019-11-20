@@ -85,18 +85,13 @@
 
 		/* correcao cripto strlen> 26537 (32bis) 113977139216969(64bis) */
 
+		
 		function decLarg($word) {
 			$s = strlen($word) + 1;
 			$nw = "";
 			$n = $this->chave;
 			for ($y = 1; $y < $s; $y++) {
 				$m = $y * $n;
-				if ($m < PHP_INT_MAX) {
-					if ($m % $s == 1) {
-						$n = $y;
-						break;
-					}
-				} else {
 					$k = floor($m / $s);
 					$r = $m - ($k * $s);
 					if ($r == 1) {
@@ -104,15 +99,11 @@
 						break;
 					}
 				}
-			}
 			for ($x = 1; $x < $s; $x++) {
 				$m = $x * $n;
 				if ($m > $s) {
-					$nindex = $m % $s;
-					if ($nindex < 0) {
 						$k = floor($m / $s);
 						$nindex = $m - ($k * $s);
-					}
 				} else if ($m < $s) {
 					$nindex = $m;
 				} else {
